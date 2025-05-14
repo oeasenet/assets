@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OEASE Static Assets</title>
+    <style>
+        /* Tailwind-like utility classes */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #93c5fd;
+            --secondary: #64748b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --code-bg: #f1f5f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--primary-light);
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .description {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .server-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            background-color: #ecfdf5;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .status-icon {
+            height: 0.75rem;
+            width: 0.75rem;
+            background-color: var(--success);
+            border-radius: 9999px;
+            margin-right: 0.5rem;
+        }
+        
+        .status-text {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--success);
+        }
+        
+        .asset-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .asset-type {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            transition: all 0.2s;
+        }
+        
+        .asset-type:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .asset-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            width: 3rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        .asset-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .asset-description {
+            color: var(--secondary);
+            font-size: 0.875rem;
+        }
+        
+        .url-example {
+            background-color: var(--code-bg);
+            border-radius: 0.375rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .url-part {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+            color: var(--dark);
+        }
+        
+        .documentation-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        
+        .documentation-link:hover {
+            text-decoration: underline;
+        }
+        
+        .arrow-icon {
+            margin-left: 0.25rem;
+            font-size: 1rem;
+        }
+        
+        .footer {
+            margin-top: auto;
+            padding: 2rem;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 0.875rem;
+            background-color: white;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .asset-types {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .subtitle {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-text">OEASE</span>
+                </div>
+                <div class="subtitle">Static Assets Server</div>
+            </div>
+            <div class="server-status">
+                <div class="status-icon"></div>
+                <span class="status-text">Server Operational</span>
+            </div>
+        </header>
+        
+        <div class="card">
+            <h1 class="title">Static Assets</h1>
+            
+            <p class="description">
+                This server hosts static assets for OEASE applications and services. All resources are served 
+                with appropriate caching headers and optimized for fast delivery.
+            </p>
+            
+            <h2 class="section-title">URL Structure</h2>
+            <div class="url-example">
+                https://<span class="url-part">assets.oease.net</span>/<span class="url-part">[asset-type]</span>/<span class="url-part">[version]</span>/<span class="url-part">[filename]</span>
+            </div>
+            
+            <h2 class="section-title">Available Asset Types</h2>
+            <div class="asset-types">
+                <div class="asset-type">
+                    <div class="asset-icon">JS</div>
+                    <h3 class="asset-title">JavaScript</h3>
+                    <p class="asset-description">Client-side scripts and application code including libraries and frameworks.</p>
+                </div>
+                
+                <div class="asset-type">
+                    <div class="asset-icon">CSS</div>
+                    <h3 class="asset-title">Stylesheets</h3>
+                    <p class="asset-description">CSS files including base styles, themes, and component-specific styles.</p>
+                </div>
+                
+                <div class="asset-type">
+                    <div class="asset-icon">IMG</div>
+                    <h3 class="asset-title">Images</h3>
+                    <p class="asset-description">Optimized images in various formats: PNG, JPG, SVG, and WebP.</p>
+                </div>
+                
+                <div class="asset-type">
+                    <div class="asset-icon">DOC</div>
+                    <h3 class="asset-title">Documents</h3>
+                    <p class="asset-description">PDF documentation, manuals, and other static document resources.</p>
+                </div>
+                
+                <div class="asset-type">
+                    <div class="asset-icon">FNT</div>
+                    <h3 class="asset-title">Fonts</h3>
+                    <p class="asset-description">Web fonts in WOFF and WOFF2 formats with appropriate cross-origin headers.</p>
+                </div>
+                
+                <div class="asset-type">
+                    <div class="asset-icon">MOD</div>
+                    <h3 class="asset-title">Modules</h3>
+                    <p class="asset-description">ES modules and other modular components with versioning support.</p>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Usage Guidelines</h2>
+            <p class="description">
+                When referencing these assets in your applications, always include the version to ensure consistent
+                behavior across deployments. Production applications should use pinned version numbers rather than 
+                "latest" to prevent unexpected changes.
+            </p>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2025 OEASE Solutions Inc. All rights reserved.</p>
+        <p>For technical support, please contact <a href="mailto:support@oease.net">support@oease.net</a></p>
+    </footer>
+</body>
+</html>
